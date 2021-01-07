@@ -1,2 +1,6 @@
 /** Adicionando um reset */
 @import-normalize;
+
+body {
+    background-color: #333;
+}
