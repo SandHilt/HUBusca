@@ -20,3 +20,22 @@
   background-color: #333333;
   justify-content: space-between;
 }
+
+.listUsersBtn {
+  background-color: transparent;
+  box-shadow: none;
+  border: 1px solid white;
+  color: white;
+  padding: 1rem 2rem;
+  transition: all 500ms;
+}
+
+.listUsersBtn[disabled] {
+  background-color: firebrick;
+}
+
+.listUsersBtn:not([disabled]):focus,
+.listUsersBtn:not([disabled]):hover {
+  color: #333333;
+  background-color: white;
+}
