@@ -1,6 +1,10 @@
 .searchContainer {
+  top: 0;
+  position: sticky;
   display: flex;
   width: 100%;
+  background-color: #333333;
+  padding-bottom: 1rem;
 }
 
 .searchBox {
@@ -24,4 +28,8 @@
 
 .searchBtn + .searchBtn {
   margin-left: 1rem;
+}
+
+.searchItensPerPage {
+  margin-left: auto;
 }

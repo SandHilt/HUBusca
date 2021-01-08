@@ -2,20 +2,18 @@ import './App.css';
 import Search from './Search';
 import ListUsers from './ListUsers';
 import { Octokit } from '@octokit/core';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 function App() {
-  const octokit = new Octokit();
-  // eslint-disable-next-line no-unused-vars
   const [users, setUsers] = useState([]);
 
   const [isFirstTime, setFirstTime] = useState(true);
 
   const itensPerPage = 10;
 
-  // eslint-disable-next-line no-unused-vars
-  const [page, SetPage] = useState(0);
+  const [page, SetPage] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
+  const [isChangePage, setChangePage] = useState(false);
 
   const [queryName, setQueryName] = useState('');
 
@@ -28,7 +26,11 @@ function App() {
   /**
    * Busca os usuarios
    */
-  async function getData() {
+  const getData = useCallback(async () => {
+    console.count('chamou github');
+
+    const octokit = new Octokit();
+
     const resp = await octokit.request(`GET /search/users`, {
       q: queryName,
       per_page: 10,
@@ -47,6 +49,24 @@ function App() {
     }));
 
     setUsers(data);
+  }, [isFirstTime, page, queryName]);
+
+  useEffect(() => {
+    if (isChangePage) {
+      getData();
+      setChangePage(false);
+      window.scrollTo(0, 0);
+    }
+  }, [getData, isChangePage]);
+
+  function nextPage() {
+    if (page + 1 <= totalPage) SetPage(page + 1);
+    setChangePage(true);
+  }
+
+  function backPage() {
+    if (page - 1 > 0) SetPage(page - 1);
+    setChangePage(true);
   }
 
   return (
@@ -57,7 +77,9 @@ function App() {
         query={queryName}
         setQuery={setQueryName}
       />
-      <ListUsers {...{ users, totalPage, isFirstTime }} />
+      <ListUsers
+        {...{ users, page, totalPage, isFirstTime, nextPage, backPage }}
+      />
     </>
   );
 }

@@ -34,6 +34,9 @@ function Search({ search, query, setQuery, onClean }) {
       <button className='searchBtn' type='button' onClick={onClean}>
         Limpar
       </button>
+      <select className='searchItensPerPage' defaultChecked={10}>
+        <option value={10}>10 usuários/página</option>
+      </select>
     </section>
   );
 }
