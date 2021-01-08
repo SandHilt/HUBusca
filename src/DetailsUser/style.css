@@ -27,4 +27,27 @@
 
 .detailsBody {
   display: flex;
+  justify-content: space-around;
+  flex-flow: row wrap;
+  width: 100%;
+}
+
+.detailsAvatar {
+  display: block;
+  max-width: 150px;
+  height: 150px;
+}
+
+.detailsRepos {
+  width: 100%;
+  height: 150px;
+  overflow-y: auto;
+}
+
+.detailsRepos li + li {
+  margin-top: 1rem;
+}
+
+.detailsReposName {
+  margin: 0;
 }

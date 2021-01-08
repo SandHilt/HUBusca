@@ -56,15 +56,17 @@ function App() {
 
     const respRepo = await octokit.request('GET /users/{username}/repos', {
       username,
+      sort: 'pushed',
     });
 
     console.log(respRepo);
 
     const reposFiltered = respRepo.data.map((repo) => {
       return {
+        html_url: repo.html_url,
         name: repo.name,
         language: repo.language,
-        description: repo.description,
+        description: repo.description ?? 'Sem descrição',
         dateCreated: repo.created_at,
         dateLastPush: repo.pushed_at,
       };
@@ -142,7 +144,7 @@ function App() {
 
   return (
     <>
-      <DetailsUser user={userSelected} {...{ isDetailsShow }} />
+      <DetailsUser user={userSelected} setUser={setUserSelect} />
       <Search
         search={getData}
         onClean={handleClean}
