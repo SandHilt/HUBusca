@@ -7,25 +7,23 @@ function DetailsUser({ user, setUser }) {
 
   if (user.repos.length > 0) {
     const eachRepos = user.repos.map((repo, key) => {
+      console.log(repo.language);
+
       return (
         <li {...{ key }}>
-          <h3 className='detailsReposName'>
+          <h5 className='detailsReposName'>
             <a href={repo.html_url} target='_blank' rel='noopener noreferrer'>
               {repo.name}
             </a>
-          </h3>
-          <small>{repo.language}</small>
+          </h5>
+          <small>Linguagem: {repo.language}</small>
         </li>
       );
     });
 
-    repos = <ol className='detailsRepos'>{eachRepos}</ol>;
+    repos = <ol className='detailsListRepos'>{eachRepos}</ol>;
   } else {
-    repos = (
-      <section className='detailsRepos'>
-        <em>Ainda não há repositórios para este usuário.</em>
-      </section>
-    );
+    repos = <em>Ainda não há repositórios para este usuário.</em>;
   }
 
   function handleClose() {
@@ -52,7 +50,10 @@ function DetailsUser({ user, setUser }) {
             <p>Nº seguidores: {user.followers}</p>
             <p>Nº repositórios públicos: {user.public_repos}</p>
           </div>
-          {repos}
+          <section className='detailsRepos'>
+            <h4>Ultímos 30 repositórios ordenados pelo último push:</h4>
+            {repos}
+          </section>
         </section>
       </div>
     </section>

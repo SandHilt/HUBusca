@@ -19,8 +19,6 @@ function App() {
 
   const [userSelected, setUserSelect] = useState(null);
 
-  const [isDetailsShow, setDetailsShow] = useState(false);
-
   /**
    * Limpando dados
    */
@@ -57,6 +55,7 @@ function App() {
     const respRepo = await octokit.request('GET /users/{username}/repos', {
       username,
       sort: 'pushed',
+      per_page: 30,
     });
 
     console.log(respRepo);
@@ -65,7 +64,7 @@ function App() {
       return {
         html_url: repo.html_url,
         name: repo.name,
-        language: repo.language,
+        language: repo.language ?? 'Desconhecido',
         description: repo.description ?? 'Sem descrição',
         dateCreated: repo.created_at,
         dateLastPush: repo.pushed_at,
@@ -138,10 +137,6 @@ function App() {
     setChangePage(true);
   }
 
-  useEffect(() => {
-    if (userSelected !== null && !isDetailsShow) setDetailsShow(true);
-  }, [isDetailsShow, userSelected]);
-
   return (
     <>
       <DetailsUser user={userSelected} setUser={setUserSelect} />
@@ -150,7 +145,6 @@ function App() {
         onClean={handleClean}
         query={queryName}
         setQuery={setQueryName}
-        {...{ isDetailsShow }}
       />
       <ListUsers
         {...{

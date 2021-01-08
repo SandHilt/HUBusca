@@ -11,7 +11,15 @@
   bottom: 0;
 }
 
+.detailsScreen .groupText p {
+  line-height: 1rem;
+  font-size: 1rem;
+}
+
 .detailsScreen .wrapper {
+  border: none;
+  border-radius: 0.25rem;
+  box-shadow: 0px 0px 10px white;
   display: flex;
   flex-flow: row wrap;
   background-color: white;
@@ -34,14 +42,20 @@
 
 .detailsAvatar {
   display: block;
-  max-width: 150px;
-  height: 150px;
+  max-width: 200px;
+  height: 200px;
+  border: 1rem double #333333;
 }
 
 .detailsRepos {
   width: 100%;
-  height: 150px;
+}
+
+.detailsListRepos {
+  padding: 0 2rem;
+  margin: 0;
   overflow-y: auto;
+  height: 150px;
 }
 
 .detailsRepos li + li {

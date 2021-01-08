@@ -1,18 +1,21 @@
 .userAvatar {
-  width: 50px;
-  height: 50px;
+  max-width: 50px;
+  width: 100%;
+  height: auto;
+  margin-right: 1rem;
 }
 
 .userCard {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
   max-width: 800px;
   margin: auto;
 }
 
 .userCard + .userCard {
   padding-top: 1rem;
-  border-top: 1px solid #2dabf3;
+  border-top: 1px solid #dedede;
 }
 
 .userBtn {
