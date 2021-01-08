@@ -7,16 +7,24 @@ function DetailsUser({ user, setUser }) {
 
   if (user.repos.length > 0) {
     const eachRepos = user.repos.map((repo, key) => {
-      console.log(repo.language);
+      const dateCreated = new Date(repo.dateCreated).toLocaleString();
+      const pushAt = new Date(repo.dateLastPush).toLocaleString();
 
       return (
         <li {...{ key }}>
-          <h5 className='detailsReposName'>
+          <h4 className='detailsReposName'>
             <a href={repo.html_url} target='_blank' rel='noopener noreferrer'>
               {repo.name}
             </a>
-          </h5>
+          </h4>
           <small>Linguagem: {repo.language}</small>
+          <p>{repo.description}</p>
+          <p>
+            Data de criação: <time>{dateCreated}</time>
+          </p>
+          <p>
+            Último push: <time>{pushAt}</time>
+          </p>
         </li>
       );
     });
@@ -51,7 +59,7 @@ function DetailsUser({ user, setUser }) {
             <p>Nº repositórios públicos: {user.public_repos}</p>
           </div>
           <section className='detailsRepos'>
-            <h4>Ultímos 30 repositórios ordenados pelo último push:</h4>
+            <h3>Ultímos 30 repositórios ordenados pelo último push:</h3>
             {repos}
           </section>
         </section>

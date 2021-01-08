@@ -64,8 +64,8 @@ function App() {
       return {
         html_url: repo.html_url,
         name: repo.name,
-        language: repo.language ?? 'Desconhecido',
-        description: repo.description ?? 'Sem descrição',
+        language: repo.language ?? 'Desconhecido.',
+        description: repo.description ?? 'Sem descrição.',
         dateCreated: repo.created_at,
         dateLastPush: repo.pushed_at,
       };
