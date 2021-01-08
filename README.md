@@ -2,6 +2,10 @@
 
 Ao vivo em: https://hubusca.herokuapp.com/
 
+## OBSERVAÇÕES
+
+- A API de busca não retorna o nome e a localização por padrão, apenas buscando pelo usuário. (endpoint: GET /search/users)
+
 ## ESCOPO
 
 Para que conseguíssemos buscar com mais facilidade e rapidez os repositórios dos devs, houve a necessidade de criar um sistema web para isso.
