@@ -22,12 +22,17 @@ function Search({ search, query, setQuery, onClean }) {
    */
   function handleSubmit(e) {
     e.preventDefault();
+    debugger;
 
     const lastUsersMemo = lastUsers.slice();
+
     if (lastUsersMemo.length === MAX_USERS) {
       lastUsersMemo.shift();
     }
-    lastUsersMemo.unshift(query);
+
+    if (!lastUsersMemo.some((saved) => saved === query)) {
+      lastUsersMemo.unshift(query.trim());
+    }
 
     setLastUsers(lastUsersMemo);
     search();
