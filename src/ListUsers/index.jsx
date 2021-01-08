@@ -1,12 +1,11 @@
 import User from '../User';
+import './style.css';
 
 function ListUsers({ users }) {
-  console.log(users);
-
   return (
-    <ul>
-      {users.map(({ photo, login }) => (
-        <User photo={(photo, login)}></User>
+    <ul className='listUsers'>
+      {users.map(({ photo, login }, key) => (
+        <User {...{ key, photo, login }}></User>
       ))}
     </ul>
   );

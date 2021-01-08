@@ -23,10 +23,10 @@ function App() {
       page,
     });
 
-    const data = {
-      photo: resp.data.avatar_url,
-      login: resp.data.login,
-    };
+    const data = resp.data.items.map((item) => ({
+      photo: item.avatar_url,
+      login: item.login,
+    }));
 
     setUsers(data);
   }

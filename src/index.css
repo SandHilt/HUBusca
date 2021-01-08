@@ -2,5 +2,10 @@
 @import-normalize;
 
 body {
-    background-color: #333;
+  font-family: 'Noto Sans', sans-serif;
+  background-color: #333;
+}
+
+button {
+  cursor: pointer;
 }

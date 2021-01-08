@@ -18,19 +18,23 @@ function Search({ search, query, setQuery }) {
   }
 
   return (
-    <>
+    <section className='searchContainer'>
       <input
         onKeyDown={handleKey}
-        className='searchUser'
+        className='searchBox'
         onChange={handleChange}
         value={query}
         type='search'
         placeholder='Digite um usuário'
+        maxLength={255}
       ></input>
-      <button type='button' onClick={search}>
+      <button className='searchBtn' type='button' onClick={search}>
         Buscar
       </button>
-    </>
+      <button className='searchBtn' type='button' onClick={search}>
+        Limpar
+      </button>
+    </section>
   );
 }
 
