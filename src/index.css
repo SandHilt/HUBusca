@@ -1,6 +1,10 @@
 /** Adicionando um reset */
 @import-normalize;
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Noto Sans', sans-serif;
   background-color: #333;

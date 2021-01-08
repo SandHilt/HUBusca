@@ -1,11 +1,12 @@
 import './style.css';
 
-function Search({ search, query, setQuery, onClean }) {
+function Search({ search, query, setQuery, onClean, isDetailsShow }) {
   /**
    * Evento para popular estado do texto
    * @param {React.ChangeEvent<HTMLInputElement>} e
    */
   function handleChange(e) {
+    if (isDetailsShow) return;
     setQuery(e.target.value);
   }
 

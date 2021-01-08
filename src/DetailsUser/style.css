@@ -1,0 +1,30 @@
+.detailsScreen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(51, 51, 51, 0.75);
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.detailsScreen .wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  background-color: white;
+  padding: 1rem;
+  color: #333333;
+  max-width: 500px;
+  width: 100%;
+}
+
+.detailsClose {
+  margin-left: auto;
+}
+
+.detailsBody {
+  display: flex;
+}

@@ -9,6 +9,7 @@ function ListUsers({
   nextPage,
   backPage,
   setUserSelect,
+  getSpecifyUser,
 }) {
   let nothingToShow;
   let pagination;
@@ -51,7 +52,9 @@ function ListUsers({
     <section className='listUsersContainer'>
       <ul className='listUsers'>
         {users.map(({ photo, login }, key) => (
-          <User {...{ key, photo, login, setUserSelect }}></User>
+          <User
+            {...{ key, photo, login, setUserSelect, getSpecifyUser }}
+          ></User>
         ))}
         {nothingToShow}
       </ul>

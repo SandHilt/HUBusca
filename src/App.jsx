@@ -1,5 +1,6 @@
 import './App.css';
 import Search from './Search';
+import DetailsUser from './DetailsUser';
 import ListUsers from './ListUsers';
 import { useCallback, useEffect, useState } from 'react';
 
@@ -16,9 +17,9 @@ function App() {
 
   const [queryName, setQueryName] = useState('');
 
-  const [userSelected, setUserSelect] = useState('');
+  const [userSelected, setUserSelect] = useState(null);
 
-  let detailsScreen;
+  const [isDetailsShow, setDetailsShow] = useState(false);
 
   /**
    * Limpando dados
@@ -46,12 +47,12 @@ function App() {
   async function getSpecifyUser(username) {
     const octokit = await handleOctokit();
 
-    const resp = await octokit.request('GET /user', {});
+    const resp = await octokit.request('GET /users/{username}', {
+      username,
+    });
 
-    console.log(resp);
+    return resp;
   }
-
-  window.getSpecifyUser = getSpecifyUser;
 
   /**
    * Busca os usuarios
@@ -73,12 +74,12 @@ function App() {
 
     setTotalPage(Math.ceil(resp.data.total_count / itensPerPage));
 
-    const data = resp.data.items.map((item) => ({
+    const dataFiltered = resp.data.items.map((item) => ({
       photo: item.avatar_url,
       login: item.login,
     }));
 
-    setUsers(data);
+    setUsers(dataFiltered);
   }, [isFirstTime, page, queryName]);
 
   useEffect(() => {
@@ -88,12 +89,6 @@ function App() {
       window.scrollTo(0, 0);
     }
   }, [getData, isChangePage]);
-
-  useEffect(() => {
-    if (userSelected !== '') {
-      console.log(userSelected);
-    }
-  }, [userSelected]);
 
   /**
    * Próxima página
@@ -111,13 +106,19 @@ function App() {
     setChangePage(true);
   }
 
+  useEffect(() => {
+    if (userSelected !== null && !isDetailsShow) setDetailsShow(true);
+  }, [isDetailsShow, userSelected]);
+
   return (
     <>
+      <DetailsUser user={userSelected} {...{ isDetailsShow }} />
       <Search
         search={getData}
         onClean={handleClean}
         query={queryName}
         setQuery={setQueryName}
+        {...{ isDetailsShow }}
       />
       <ListUsers
         {...{
@@ -128,6 +129,7 @@ function App() {
           nextPage,
           backPage,
           setUserSelect,
+          getSpecifyUser,
         }}
       />
     </>
