@@ -1,7 +1,6 @@
 import './App.css';
 import Search from './Search';
 import ListUsers from './ListUsers';
-import { Octokit } from '@octokit/core';
 import { useCallback, useEffect, useState } from 'react';
 
 function App() {
@@ -29,7 +28,9 @@ function App() {
   const getData = useCallback(async () => {
     console.count('chamou github');
 
-    const octokit = new Octokit();
+    const { Octokit } = await import('@octokit/core');
+    const auth = process.env.REACT_APP_GITHUB_SECRET;
+    const octokit = new Octokit({ auth });
 
     const resp = await octokit.request(`GET /search/users`, {
       q: queryName,
