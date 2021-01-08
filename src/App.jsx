@@ -9,12 +9,16 @@ function App() {
   // eslint-disable-next-line no-unused-vars
   const [users, setUsers] = useState([]);
   // eslint-disable-next-line no-unused-vars
+  const itensPerPage = 10;
+
   const [page, SetPage] = useState(0);
+  const [totalPage, setTotalPage] = useState(0);
 
   const [queryName, setQueryName] = useState('');
 
   function handleClean() {
     setUsers([]);
+    setTotalPage(0);
   }
 
   /**
@@ -26,6 +30,10 @@ function App() {
       per_page: 10,
       page,
     });
+
+    console.log(resp);
+
+    setTotalPage(Math.ceil(resp.data.total_count / itensPerPage));
 
     const data = resp.data.items.map((item) => ({
       photo: item.avatar_url,
@@ -43,7 +51,7 @@ function App() {
         query={queryName}
         setQuery={setQueryName}
       />
-      <ListUsers users={users} />
+      <ListUsers {...{ users, totalPage }} />
     </>
   );
 }
