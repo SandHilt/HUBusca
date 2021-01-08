@@ -6,6 +6,7 @@ const MAX_USERS = 5;
 function Search({ search, query, setQuery, onClean }) {
   const [lastUsers, setLastUsers] = useState([]);
   const [triggerKey, setTriggerKey] = useState(true);
+  const [lastValueSelect, setLastValueSelect] = useState(null);
 
   /**
    * Evento para popular estado do texto
@@ -22,17 +23,24 @@ function Search({ search, query, setQuery, onClean }) {
    */
   function handleSubmit(e) {
     e.preventDefault();
-    debugger;
-
     const lastUsersMemo = lastUsers.slice();
 
     if (lastUsersMemo.length === MAX_USERS) {
       lastUsersMemo.shift();
     }
 
-    if (!lastUsersMemo.some((saved) => saved === query)) {
-      lastUsersMemo.unshift(query.trim());
+    let isDuplicated = false;
+
+    for (let i = 0, j = lastUsersMemo.length; i < j; i++) {
+      const saved = lastUsersMemo[i];
+      if (saved === query) {
+        setLastValueSelect(i);
+        isDuplicated = true;
+        break;
+      }
     }
+
+    if (!isDuplicated) lastUsersMemo.unshift(query.trim());
 
     setLastUsers(lastUsersMemo);
     search();
@@ -74,7 +82,11 @@ function Search({ search, query, setQuery, onClean }) {
       </div>
       <div className='groupLastSearch' hidden={lastUsers.length === 0}>
         <label htmlFor='lastSearch'>Últimos pesquisados</label>
-        <select id='lastSearch' onChange={handleLastSearch}>
+        <select
+          id='lastSearch'
+          onChange={handleLastSearch}
+          defaultValue={lastValueSelect}
+        >
           {lastUsers.map((user, key) => {
             return (
               <option value={key} {...{ key }}>

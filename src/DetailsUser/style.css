@@ -30,6 +30,10 @@
 }
 
 .detailsClose {
+  background-color: #333333;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border: none;
   margin-left: auto;
 }
 
