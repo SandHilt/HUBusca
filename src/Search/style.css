@@ -33,6 +33,10 @@
   color: white;
 }
 
-.searchItensPerPage {
+.groupLastSearch {
   margin-left: auto;
+}
+
+#lastSearch {
+  margin-left: 1rem;
 }

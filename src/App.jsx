@@ -43,14 +43,14 @@ function App() {
    * @param {string} username
    */
   async function getSpecifyUser(username) {
-    console.count('chamou usuario spec');
+    // console.count('chamou usuario spec');
 
     const octokit = await handleOctokit();
 
     const respUser = await octokit.request('GET /users/{username}', {
       username,
     });
-    console.log(respUser);
+    // console.log(respUser);
 
     const respRepo = await octokit.request('GET /users/{username}/repos', {
       username,
@@ -58,7 +58,7 @@ function App() {
       per_page: 30,
     });
 
-    console.log(respRepo);
+    // console.log(respRepo);
 
     const reposFiltered = respRepo.data.map((repo) => {
       return {
@@ -89,7 +89,7 @@ function App() {
    * Busca os usuarios
    */
   const getData = useCallback(async () => {
-    console.count('chamou github');
+    // console.count('chamou a pesquisa do github');
 
     const octokit = await handleOctokit();
 
@@ -99,7 +99,7 @@ function App() {
       page,
     });
 
-    console.log(resp);
+    // console.log(resp);
 
     if (isFirstTime) setFirstTime(false);
 

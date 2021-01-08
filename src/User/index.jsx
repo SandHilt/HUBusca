@@ -19,7 +19,7 @@ function User({ photo, login, getSpecifyUser }) {
       >
         <img className='userAvatar' src={photo} alt='Foto de usuario'></img>
       </a>
-      <h2>Nick: {login}</h2>
+      <h2>Login: {login}</h2>
     </li>
   );
 }
