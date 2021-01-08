@@ -8,9 +8,12 @@ function App() {
   const octokit = new Octokit();
   // eslint-disable-next-line no-unused-vars
   const [users, setUsers] = useState([]);
-  // eslint-disable-next-line no-unused-vars
+
+  const [isFirstTime, setFirstTime] = useState(true);
+
   const itensPerPage = 10;
 
+  // eslint-disable-next-line no-unused-vars
   const [page, SetPage] = useState(0);
   const [totalPage, setTotalPage] = useState(0);
 
@@ -19,6 +22,7 @@ function App() {
   function handleClean() {
     setUsers([]);
     setTotalPage(0);
+    setFirstTime(true);
   }
 
   /**
@@ -32,6 +36,8 @@ function App() {
     });
 
     console.log(resp);
+
+    if (isFirstTime) setFirstTime(false);
 
     setTotalPage(Math.ceil(resp.data.total_count / itensPerPage));
 
@@ -51,7 +57,7 @@ function App() {
         query={queryName}
         setQuery={setQueryName}
       />
-      <ListUsers {...{ users, totalPage }} />
+      <ListUsers {...{ users, totalPage, isFirstTime }} />
     </>
   );
 }

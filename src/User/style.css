@@ -6,7 +6,6 @@
 .userCard {
   display: flex;
   flex-direction: column;
-  color: white;
 }
 
 .userCard + .userCard {
