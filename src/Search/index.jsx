@@ -1,6 +1,6 @@
 import './style.css';
 
-function Search({ search, query, setQuery }) {
+function Search({ search, query, setQuery, onClean }) {
   /**
    * Evento para popular estado do texto
    * @param {React.ChangeEvent<HTMLInputElement>} e
@@ -31,7 +31,7 @@ function Search({ search, query, setQuery }) {
       <button className='searchBtn' type='button' onClick={search}>
         Buscar
       </button>
-      <button className='searchBtn' type='button' onClick={search}>
+      <button className='searchBtn' type='button' onClick={onClean}>
         Limpar
       </button>
     </section>

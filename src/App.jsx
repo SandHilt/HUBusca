@@ -13,6 +13,10 @@ function App() {
 
   const [queryName, setQueryName] = useState('');
 
+  function handleClean() {
+    setUsers([]);
+  }
+
   /**
    * Busca os usuarios
    */
@@ -33,7 +37,12 @@ function App() {
 
   return (
     <>
-      <Search search={getData} query={queryName} setQuery={setQueryName} />
+      <Search
+        search={getData}
+        onClean={handleClean}
+        query={queryName}
+        setQuery={setQueryName}
+      />
       <ListUsers users={users} />
     </>
   );
