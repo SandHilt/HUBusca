@@ -11,33 +11,44 @@ function Search({ search, query, setQuery, onClean }) {
 
   /**
    *
-   * @param {React.KeyboardEvent<HTMLInputElement>} e
+   * @param {React.FormEvent<HTMLFormElement>} e
    */
-  function handleKey(e) {
-    if (e.code === 'Enter') search();
+  function handleSubmit(e) {
+    e.preventDefault();
+    search();
   }
 
+  /**
+   *
+   * @param {React.KeyboardEvent<HTMLInputElement>} e
+   */
+  // function handleKey(e) {
+  //   if (e.code === 'Enter') search();
+  // }
+
   return (
-    <section className='searchContainer'>
+    <form className='searchContainer' method='POST' onSubmit={handleSubmit}>
       <input
-        onKeyDown={handleKey}
         className='searchBox'
         onChange={handleChange}
         value={query}
         type='search'
         placeholder='Digite um usuário'
         maxLength={255}
+        minLength={3}
       ></input>
-      <button className='searchBtn' type='button' onClick={search}>
-        Buscar
-      </button>
-      <button className='searchBtn' type='button' onClick={onClean}>
-        Limpar
-      </button>
+      <div className='searchGroupBtn'>
+        <button className='searchBtn' type='submit'>
+          Buscar
+        </button>
+        <button className='searchBtn' type='button' onClick={onClean}>
+          Limpar
+        </button>
+      </div>
       <select className='searchItensPerPage' defaultChecked={10}>
         <option value={10}>10 usuários/página</option>
       </select>
-    </section>
+    </form>
   );
 }
 

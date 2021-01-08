@@ -20,15 +20,17 @@
   box-shadow: 0px 1px 20px #fff;
 }
 
+.searchGroupBtn {
+  display: grid;
+  grid-auto-flow: column;
+  column-gap: 1rem;
+}
+
 .searchBtn {
   border: 1px solid white;
   padding: 0.5rem 2rem;
   background-color: #333333;
   color: white;
-}
-
-.searchBtn + .searchBtn {
-  margin-left: 1rem;
 }
 
 .searchItensPerPage {

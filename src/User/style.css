@@ -6,10 +6,17 @@
 .userCard {
   display: flex;
   flex-direction: column;
+  max-width: 800px;
+  margin: auto;
 }
 
 .userCard + .userCard {
-  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #2dabf3;
+}
+
+.userCard.selected {
+  background-color: green;
 }
 
 .userBtn {

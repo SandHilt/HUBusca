@@ -16,11 +16,42 @@ function App() {
 
   const [queryName, setQueryName] = useState('');
 
+  const [userSelected, setUserSelect] = useState('');
+
+  let detailsScreen;
+
+  /**
+   * Limpando dados
+   */
   function handleClean() {
     setUsers([]);
     setTotalPage(0);
+    SetPage(1);
+    setQueryName('');
     setFirstTime(true);
   }
+
+  async function handleOctokit() {
+    const { Octokit } = await import('@octokit/core');
+    // const auth = process.env.REACT_APP_GITHUB_SECRET;
+    const octokit = new Octokit();
+
+    return octokit;
+  }
+
+  /**
+   *
+   * @param {string} username
+   */
+  async function getSpecifyUser(username) {
+    const octokit = await handleOctokit();
+
+    const resp = await octokit.request('GET /user', {});
+
+    console.log(resp);
+  }
+
+  window.getSpecifyUser = getSpecifyUser;
 
   /**
    * Busca os usuarios
@@ -28,9 +59,7 @@ function App() {
   const getData = useCallback(async () => {
     console.count('chamou github');
 
-    const { Octokit } = await import('@octokit/core');
-    const auth = process.env.REACT_APP_GITHUB_SECRET;
-    const octokit = new Octokit({ auth });
+    const octokit = await handleOctokit();
 
     const resp = await octokit.request(`GET /search/users`, {
       q: queryName,
@@ -60,11 +89,23 @@ function App() {
     }
   }, [getData, isChangePage]);
 
+  useEffect(() => {
+    if (userSelected !== '') {
+      console.log(userSelected);
+    }
+  }, [userSelected]);
+
+  /**
+   * Próxima página
+   */
   function nextPage() {
     if (page + 1 <= totalPage) SetPage(page + 1);
     setChangePage(true);
   }
 
+  /**
+   * Página anterior
+   */
   function backPage() {
     if (page - 1 > 0) SetPage(page - 1);
     setChangePage(true);
@@ -79,7 +120,15 @@ function App() {
         setQuery={setQueryName}
       />
       <ListUsers
-        {...{ users, page, totalPage, isFirstTime, nextPage, backPage }}
+        {...{
+          users,
+          page,
+          totalPage,
+          isFirstTime,
+          nextPage,
+          backPage,
+          setUserSelect,
+        }}
       />
     </>
   );

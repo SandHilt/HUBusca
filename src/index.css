@@ -13,3 +13,7 @@ button:not([disabled]) {
 button[disabled] {
   cursor: not-allowed;
 }
+
+img {
+  display: block;
+}
