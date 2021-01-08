@@ -1,24 +1,17 @@
 import './style.css';
 
-function User({ photo, login, setUserSelect, getSpecifyUser }) {
+function User({ photo, login, getSpecifyUser }) {
   /**
    *
    * @param {React.MouseEvent<HTMLAnchorElement, MouseEvent>} e
    */
-  async function handleDetails(e) {
+  function handleDetails(e) {
     e.preventDefault();
-    const details = await getSpecifyUser(login);
-    setUserSelect(details);
+    getSpecifyUser(login);
   }
 
   return (
     <li className='userCard'>
-      {/* <button
-        type='button'
-        className='userAvatarAnchor'
-        onClick={handleDetails}
-        alt='Clique para ver mais do usuário'
-      > */}
       <a
         className='userAvatarAnchor'
         href={`#${login}`}
@@ -26,7 +19,6 @@ function User({ photo, login, setUserSelect, getSpecifyUser }) {
       >
         <img className='userAvatar' src={photo} alt='Foto de usuario'></img>
       </a>
-      {/* </button> */}
       <h2>Nick: {login}</h2>
     </li>
   );

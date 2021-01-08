@@ -8,7 +8,6 @@ function ListUsers({
   isFirstTime,
   nextPage,
   backPage,
-  setUserSelect,
   getSpecifyUser,
 }) {
   let nothingToShow;
@@ -52,9 +51,7 @@ function ListUsers({
     <section className='listUsersContainer'>
       <ul className='listUsers'>
         {users.map(({ photo, login }, key) => (
-          <User
-            {...{ key, photo, login, setUserSelect, getSpecifyUser }}
-          ></User>
+          <User {...{ key, photo, login, getSpecifyUser }}></User>
         ))}
         {nothingToShow}
       </ul>

@@ -15,10 +15,6 @@
   border-top: 1px solid #2dabf3;
 }
 
-.userCard.selected {
-  background-color: green;
-}
-
 .userBtn {
   display: block;
   max-width: 200px;

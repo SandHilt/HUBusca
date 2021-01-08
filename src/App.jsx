@@ -45,13 +45,43 @@ function App() {
    * @param {string} username
    */
   async function getSpecifyUser(username) {
+    console.count('chamou usuario spec');
+
     const octokit = await handleOctokit();
 
-    const resp = await octokit.request('GET /users/{username}', {
+    const respUser = await octokit.request('GET /users/{username}', {
+      username,
+    });
+    console.log(respUser);
+
+    const respRepo = await octokit.request('GET /users/{username}/repos', {
       username,
     });
 
-    return resp;
+    console.log(respRepo);
+
+    const reposFiltered = respRepo.data.map((repo) => {
+      return {
+        name: repo.name,
+        language: repo.language,
+        description: repo.description,
+        dateCreated: repo.created_at,
+        dateLastPush: repo.pushed_at,
+      };
+    });
+
+    const userDataFiltered = {
+      photo: respUser.data.avatar_url,
+      name: respUser.data.name,
+      login: respUser.data.login,
+      location: respUser.data.location,
+      id: respUser.data.id,
+      followers: respUser.data.followers,
+      public_repos: respUser.data.public_repos,
+      repos: reposFiltered,
+    };
+
+    setUserSelect(userDataFiltered);
   }
 
   /**
